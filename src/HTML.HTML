@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora Incrível</title>
+  <style>
+    :root {
+      --bg-color: #222;
+      --text-color: #fff;
+      --button-bg: #007bff;
+      --button-hover: #0056b3;
+      --input-bg: #444;
+    }
+
+    body.light {
+      --bg-color: #f5f5f5;
+      --text-color: #000;
+      --button-bg: #4CAF50;
+      --button-hover: #388E3C;
+      --input-bg: #ddd;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      transition: 0.4s;
+    }
+
+    .calculator {
+      max-width: 600px;
+      margin: auto;
+      background-color: var(--input-bg);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      transition: 0.4s;
+    }
+
+    input, select, button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      background: var(--input-bg);
+      color: var(--text-color);
+    }
+
+    select {
+      background-color: var(--input-bg);
+    }
+
+    button {
+      background-color: var(--button-bg);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--button-hover);
+    }
+
+    .history {
+      background-color: var(--bg-color);
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    .keypad button {
+      width: 23%;
+      margin: 1%;
+      font-size: 18px;
+    }
+
+    .fade {
+      animation: fade 0.3s ease-in-out;
+    }
+
+    @keyframes fade {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .toggle-theme {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="toggle-theme" onclick="toggleTheme()">🌗 Mudar Tema</button>
+
+  <div class="calculator fade">
+    <h1>Calculadora Incrível</h1>
+
+    <input type="number" id="num1" placeholder="Digite o primeiro número">
+    <input type="number" id="num2" placeholder="Digite o segundo número">
+
+    <select id="operacao">
+      <option value="soma">Soma</option>
+      <option value="subtracao">Subtração</option>
+      <option value="multiplicacao">Multiplicação</option>
+      <option value="divisao">Divisão</option>
+      <option value="potencia">Exponenciação</option>
+      <option value="raiz">Raiz Quadrada</option>
+      <option value="seno">Seno</option>
+      <option value="cosseno">Cosseno</option>
+      <option value="tangente">Tangente</option>
+      <option value="porcentagem">Porcentagem</option>
+      <option value="media">Média</option>
+      <option value="comparar">Comparar</option>
+      <option value="areaTriangulo">Área do Triângulo</option>
+      <option value="parOuImpar">Par ou Ímpar</option>
+      <option value="primo">Número Primo</option>
+      <option value="reaisParaDolar">Converter Reais p/ Dólar</option>
+    </select>
+
+    <button onclick="calcular()">Calcular</button>
+    <p id="resultado">Resultado: </p>
+    <p id="contador">Operações realizadas: 0</p>
+
+    <h3>Histórico</h3>
+    <div class="history" id="historico"></div>
+
+    <h3>Teclado Rápido</h3>
+    <div class="keypad">
+      <button onclick="preencherNumero(1)">1</button>
+      <button onclick="preencherNumero(2)">2</button>
+      <button onclick="preencherNumero(3)">3</button>
+      <button onclick="limparCampos()">C</button>
+      <button onclick="preencherNumero(4)">4</button>
+      <button onclick="preencherNumero(5)">5</button>
+      <button onclick="preencherNumero(6)">6</button>
+      <button onclick="preencherNumero(0)">0</button>
+    </div>
+  </div>
+
+  <audio id="clickSound" src="https://www.soundjay.com/buttons/button-16.mp3" preload="auto"></audio>
+
+  <script>
+    let contador = 0;
+    const historico = JSON.parse(localStorage.getItem("historicoCalc")) || [];
+
+    function playClick() {
+      document.getElementById("clickSound").play();
+    }
+
+    function preencherNumero(n) {
+      const num1 = document.getElementById("num1");
+      const num2 = document.getElementById("num2");
+      if (document.activeElement === num2) {
+        num2.value += n;
+      } else {
+        num1.value += n;
+      }
+      playClick();
+    }
+
+    function limparCampos() {
+      document.getElementById("num1").value = "";
+      document.getElementById("num2").value = "";
+      playClick();
+    }
+
+    function calcular() {
+      playClick();
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const operacao = document.getElementById("operacao").value;
+      let resultado = "";
+
+      if (isNaN(num1)) {
+        alert("Digite um número válido no primeiro campo!");
+        return;
+      }
+
+      switch (operacao) {
+        case "soma":
+          resultado = num1 + num2;
+          break;
+        case "subtracao":
+          resultado = num1 - num2;
+          break;
+        case "multiplicacao":
+          resultado = num1 * num2;
+          break;
+        case "divisao":
+          resultado = num2 !== 0 ? (num1 / num2) : "Erro: divisão por zero";
+          break;
+        case "potencia":
+          resultado = Math.pow(num1, num2);
+          break;
+        case "raiz":
+          resultado = num1 >= 0 ? Math.sqrt(num1) : "Erro: número negativo";
+          break;
+        case "seno":
+          resultado = Math.sin(toRadian(num1));
+          break;
+        case "cosseno":
+          resultado = Math.cos(toRadian(num1));
+          break;
+        case "tangente":
+          resultado = Math.tan(toRadian(num1));
+          break;
+        case "porcentagem":
+          resultado = (num1 / 100) * num2;
+          break;
+        case "media":
+          resultado = (num1 + num2) / 2;
+          break;
+        case "comparar":
+          resultado = num1 > num2 ? `${num1} é maior` : (num1 < num2 ? `${num2} é maior` : "Iguais");
+          break;
+        case "areaTriangulo":
+          resultado = (num1 * num2) / 2;
+          break;
+        case "parOuImpar":
+          resultado = parseInt(num1) % 2 === 0 ? "Par" : "Ímpar";
+          break;
+        case "primo":
+          resultado = verificarPrimo(num1);
+          break;
+        case "reaisParaDolar":
+          resultado = `US$ ${(num1 / 5).toFixed(2)}`;
+          break;
+        default:
+          resultado = "Operação inválida.";
+      }
+
+      contador++;
+      document.getElementById("resultado").textContent = `Resultado: ${resultado}`;
+      document.getElementById("contador").textContent = `Operações realizadas: ${contador}`;
+
+      const entrada = `${operacao} ➜ ${resultado}`;
+      historico.push(entrada);
+      if (historico.length > 15) historico.shift();
+      localStorage.setItem("historicoCalc", JSON.stringify(historico));
+      atualizarHistorico();
+    }
+
+    function toRadian(graus) {
+      return graus * Math.PI / 180;
+    }
+
+    function verificarPrimo(n) {
+      n = parseInt(n);
+      if (n <= 1 || isNaN(n)) return "Não é primo";
+      for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) return "Não é primo";
+      }
+      return "É primo";
+    }
+
+    function atualizarHistorico() {
+      const divHistorico = document.getElementById("historico");
+      divHistorico.innerHTML = historico.slice().reverse().map(op => `<p>${op}</p>`).join("");
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+    }
+
+    atualizarHistorico();
+  </script>
+
+</body>
+</html>
