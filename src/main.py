@@ -44,19 +44,19 @@ def porcentagem(a,b):
     resultado = (a * b) / 100
     return resultado
 
-def converter graus para radianos(a):
+def converter_graus_para_radianos(a):
     resultado = a * (math.pi / 180)
     return resultado
     
-def converter radianos para graus(a):
+def converter_radianos_para_graus(a):
     resultado = a * (180 / math.pi)
     return resultado    
     
-def média entre dois números(a,b):
+def media_entre_dois_numeros(a,b):
     resultado = (a + b) / 2
     return resultado    
     
-def comparar dois números(a,b):
+def comparar_dois_numeros(a,b):
     if a > b:
         resultado = f'{a} é maior que {b}'
     elif a < b:
@@ -65,50 +65,50 @@ def comparar dois números(a,b):
         resultado = f'{a} é igual a {b}'
     return resultado
     
-def area do triangulo(base, altura):
+def area_do_triangulo(base, altura):
     resultado = (base * altura) / 2
     return resultado
     
-def arredondar numeros(a):
+def arredondar_numeros(a):
     resultado = round(a)
     return resultado
     
-def inverter sinal(a):
+def inverter_sinal(a):
     resultado = -a
     return resultado
     
-def verificar múltiplos(a,b):
+def verificar_multiplos(a,b):
     if a % b == 0:
         resultado = f'{a} é múltiplo de {b}'
     else:
         resultado = f'{a} não é múltiplo de {b}'
     return resultado
     
-def media ponderada(n1, n2, peso1, peso2):
+def media_ponderada(n1, n2, peso1, peso2):
     resultado = (n1 * peso1 + n2 * peso2) / (peso1 + peso2)
     return resultado
     
-def media de varios numeros(lista):
+def media_de_varios_numeros(lista):
     if not lista:
         return 0
     resultado = sum(lista) / len(lista)
     return resultado
     
-def potencia com expoente negativo(a, b):
+def potencia_com_expoente_negativo(a, b):
     if b < 0:
         resultado = 1 / (a ** abs(b))
     else:
         resultado = a ** b
     return resultado
     
-def verificar par ou ímpar(a):
+def verificar_par_ou_impar(a):
     if a % 2 == 0:
         resultado = f'{a} é par'
     else:
         resultado = f'{a} é ímpar'
     return resultado
     
-def verificar numero primo(a):
+def verificar_numero_primo(a):
     if a < 2:
         return f'{a} não é primo'
     for i in range(2, int(a ** 0.5) + 1):
@@ -116,7 +116,7 @@ def verificar numero primo(a):
             return f'{a} não é primo'
     return f'{a} é primo'   
     
-def converter reais para dolares(valor, cotacao):
+def converter_reais_para_dolares(valor, cotacao):
     resultado = valor / cotacao
     return resultado
     
