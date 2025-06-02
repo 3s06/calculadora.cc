@@ -21,8 +21,7 @@ def potencia(a,b):
 
 def raiz_quadrada(a,b):
     resultado = a ** (1/b)
-    historico.append(f1{n2}√{n1} = {resultado}')
-    return resultado
+    return resultado 
     
 def seno (a):
     resultado = math.sin(a)
@@ -118,8 +117,8 @@ def converter_reais_para_dolares(valor, cotacao):
     
 is_running = True
 historico = []
-n1 = 0
-n2 = 0      
+a = 0
+b = 0      
 
 while is_running == True:
     print('Selecione uma operação:')
@@ -155,93 +154,93 @@ while is_running == True:
         is_running = False
         continue
 
-    n1 = float(input("Digite o primeiro número: "))
+    a = float(input("Digite o primeiro número: "))
     
     if escolha in ['1', '2', '3', '4', '5', '6', '10', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']:
-        n2 = float(input("Digite o segundo número: "))
+        b = float(input("Digite o segundo número: "))
 
     if escolha == '1':
-        resultado = soma(n1, n2)
-        historico.append(f'{n1} + {n2} = {resultado}')
+        resultado = soma(a, b)
+        historico.append(f'{a} + {b} = {resultado}')
     
     elif escolha == '2':
-        resultado = subtracao(n1, n2)
-        historico.append(f'{n1} - {n2} = {resultado}')
+        resultado = subtracao(a, b)
+        historico.append(f'{a} - {b} = {resultado}')
     
     elif escolha == '3':
-        resultado = multiplicacao(n1, n2)
-        historico.append(f'{n1} * {n2} = {resultado}')
+        resultado = multiplicacao(a, b)
+        historico.append(f'{a} * {b} = {resultado}')
     
     elif escolha == '4':
-        resultado = divisao(n1, n2)
-        historico.append(f'{n1} / {n2} = {resultado}')
+        resultado = divisao(a, b)
+        historico.append(f'{a} / {b} = {resultado}')
     elif escolha == '5':
-        resultado = potencia(n1, n2)
-        historico.append(f'{n1} ** {n2} = {resultado}')
+        resultado = potencia(a, b)
+        historico.append(f'{a} ** {b} = {resultado}')
     elif escolha == '6':
-        resultado = raiz_quadrada(n1, n2)
-        historico.append(f'{n2}√{n1} = {resultado}')
+        resultado = raiz_quadrada(a, b)
+        historico.append(f'{a}√{b} = {resultado}')
     elif escolha == '7':
-        resultado = seno(n1)
-        historico.append(f'sin({n1}) = {resultado}')
+        resultado = seno(a)
+        historico.append(f'sin({a}) = {resultado}')
     elif escolha == '8':
-        resultado = cos(n1)
-        historico.append(f'cos({n1}) = {resultado}')
+        resultado = cos(a)
+        historico.append(f'cos({a}) = {resultado}')
     elif escolha == '9':
-        resultado = tangente(n1)
-        historico.append(f'tan({n1}) = {resultado}')
+        resultado = tangente(a)
+        historico.append(f'tan({a}) = {resultado}')
     elif escolha == '10':
-        resultado = porcentagem(n1, n2)
-        historico.append(f'{n1} * {n2}% = {resultado}')
+        resultado = porcentagem(a, b)
+        historico.append(f'{a} * {b}% = {resultado}')
     elif escolha == '11':
-        resultado = converter_graus_para_radianos(n1)
-        historico.append(f'{n1} graus = {resultado} radianos')
+        resultado = converter_graus_para_radianos(a)
+        historico.append(f'{a} graus = {resultado} radianos')
     elif escolha == '12':
-        resultado = converter_radianos_para_graus(n1)
-        historico.append(f'{n1} radianos = {resultado} graus')
+        resultado = converter_radianos_para_graus(a)
+        historico.append(f'{a} radianos = {resultado} graus')
     elif escolha == '13':
-        resultado = média_entre_dois_números(n1, n2)
-        historico.append(f'Média entre {n1} e {n2} = {resultado}')
+        resultado = média_entre_dois_números(a, b)
+        historico.append(f'Média entre {a}  e {b} = {resultado}')
     elif escolha == '14':
-        resultado = comparar_dois_números(n1, n2)
+        resultado = comparar_dois_números(a, b)
         historico.append(resultado)
     elif escolha == '15':
-        base = n1
-        altura = n2
+        base = a
+        altura = b
         resultado = area_do_triangulo(base, altura)
         historico.append(f'Área do triângulo com base {base} e altura {altura} = {resultado}')
     elif escolha == '16':
-        resultado = arredondar_numeros(n1)
-        historico.append(f'Arredondamento de {n1} = {resultado}')
+        resultado = arredondar_numeros(a)
+        historico.append(f'Arredondamento de {a} = {resultado}')
     elif escolha == '17':
-        resultado = inverter_sinal(n1)
-        historico.append(f'Inversão de sinal de {n1} = {resultado}')
+        resultado = inverter_sinal(a)
+        historico.append(f'Inversão de sinal de {a} = {resultado}')
     elif escolha == '18':
-        resultado = verificar_multiplos(n1, n2)
+        resultado = verificar_multiplos(a, b)
         historico.append(resultado)
     elif escolha == '19':
         peso1 = float(input("Digite o peso do primeiro número: "))
         peso2 = float(input("Digite o peso do segundo número: "))
-        resultado = media_ponderada(n1, n2, peso1, peso2)
-        historico.append(f'Média ponderada de {n1} e {n2} com pesos {peso1} e {peso2} = {resultado}')
+        resultado = media_ponderada(a, b, peso1, peso2)
+        historico.append(f'Média ponderada de {a} e {b} com pesos {peso1} e {peso2} = {resultado}')
     elif escolha == '20':
         numeros = input("Digite os números separados por vírgula: ")
         lista_numeros = [float(num) for num in numeros.split(',')]
         resultado = media_de_varios_numeros(lista_numeros)
         historico.append(f'Média dos números {lista_numeros} = {resultado}')
     elif escolha == '21':
-        resultado = potencia_com_expoente_negativo(n1, n2)
-        historico.append(f'{n1} ** {n2} = {resultado}')
+        resultado = potencia_com_expoente_negativo(a, b)
+        historico.append(f'{a} ** {b} = {resultado}')
     elif escolha == '22':
-        resultado = verificar_par_ou_impar(n1)
+        resultado = verificar_par_ou_impar(a)
         historico.append(resultado)
     elif escolha == '23':
-        resultado = verificar_numero_primo(n1)
+        resultado = verificar_numero_primo(a)
         historico.append(resultado)
     elif escolha == '24':
         cotacao = float(input("Digite a cotação do dólar: "))
         resultado = converter_reais_para_dolares(n1, cotacao)
-        historico.append(f'{n1} reais = {resultado} dólares (cotação: {cotacao})')
+        historico.append(f'{a} reais = {resultado} dólares (cotação: {cotacao})')
     else:
         print("Operação inválida. Tente novamente.")
         continue
