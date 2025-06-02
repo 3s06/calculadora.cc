@@ -11,13 +11,9 @@ def multiplicacao(a,b):
     return resultado    
 
 def divisao(a,b):
-    if n2 == 0:
-        resultado = 'operação inválida'
-    return resultado
-    else:
-        resultado = a / b
-        historico.append(f'{n1} / {n2} = {resultado}')
-    return resultado
+    if b == 0:
+        return 'operacao invalida'
+    return a / b
     
 def potencia(a,b):
     resultado = a ** b
