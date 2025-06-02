@@ -239,7 +239,7 @@ while is_running == True:
         historico.append(resultado)
     elif escolha == '24':
         cotacao = float(input("Digite a cotação do dólar: "))
-        resultado = converter_reais_para_dolares(n1, cotacao)
+        resultado = converter_reais_para_dolares(a, cotacao)
         historico.append(f'{a} reais = {resultado} dólares (cotação: {cotacao})')
     else:
         print("Operação inválida. Tente novamente.")
