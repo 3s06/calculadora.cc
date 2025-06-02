@@ -1,3 +1,5 @@
+import math
+
 def soma(a,b):
     resultado = a + b
     return resultado
@@ -156,90 +158,114 @@ while is_running == True:
 
     a = float(input("Digite o primeiro número: "))
     
-    if escolha in ['1', '2', '3', '4', '5', '6', '10', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']:
+    if escolha in ['1', '2', '3', '4', '5', '6', '10', '13', '14', '15', '18', '19', '20', '21']:
         b = float(input("Digite o segundo número: "))
 
     if escolha == '1':
         resultado = soma(a, b)
+        print("Resultado:", resultado)
         historico.append(f'{a} + {b} = {resultado}')
     
     elif escolha == '2':
         resultado = subtracao(a, b)
+        print("Resultado:", resultado)
         historico.append(f'{a} - {b} = {resultado}')
     
     elif escolha == '3':
         resultado = multiplicacao(a, b)
+        print("Resultado:", resultado)
         historico.append(f'{a} * {b} = {resultado}')
     
     elif escolha == '4':
         resultado = divisao(a, b)
+        print("Resultado:", resultado)
         historico.append(f'{a} / {b} = {resultado}')
     elif escolha == '5':
         resultado = potencia(a, b)
+        print("Resultado:", resultado)
         historico.append(f'{a} ** {b} = {resultado}')
     elif escolha == '6':
         resultado = raiz_quadrada(a, b)
-        historico.append(f'{a}√{b} = {resultado}')
+        print("Resultado:", resultado)
+        historico.append(f'{b}√{a} = {resultado}')
     elif escolha == '7':
         resultado = seno(a)
+        print("Resultado:", resultado)
         historico.append(f'sin({a}) = {resultado}')
     elif escolha == '8':
         resultado = cos(a)
+        print("Resultado:", resultado)
         historico.append(f'cos({a}) = {resultado}')
     elif escolha == '9':
         resultado = tangente(a)
+        print("Resultado:", resultado)
         historico.append(f'tan({a}) = {resultado}')
     elif escolha == '10':
         resultado = porcentagem(a, b)
+        print("Resultado:", resultado)
         historico.append(f'{a} * {b}% = {resultado}')
     elif escolha == '11':
         resultado = converter_graus_para_radianos(a)
+        print("Resultado:", resultado)
         historico.append(f'{a} graus = {resultado} radianos')
     elif escolha == '12':
         resultado = converter_radianos_para_graus(a)
+        print("Resultado:", resultado)
         historico.append(f'{a} radianos = {resultado} graus')
     elif escolha == '13':
         resultado = media_entre_dois_numeros(a, b)
+        print("Resultado:", resultado)
         historico.append(f'Média entre {a}  e {b} = {resultado}')
     elif escolha == '14':
         resultado = comparar_dois_numeros(a, b)
+        print("Resultado:", resultado)
         historico.append(resultado)
     elif escolha == '15':
         base = a
         altura = b
         resultado = area_do_triangulo(base, altura)
+        print("Resultado:", resultado)
         historico.append(f'Área do triângulo com base {base} e altura {altura} = {resultado}')
     elif escolha == '16':
         resultado = arredondar_numeros(a)
+        print("Resultado:", resultado)
         historico.append(f'Arredondamento de {a} = {resultado}')
     elif escolha == '17':
         resultado = inverter_sinal(a)
+        print("Resultado:", resultado)
         historico.append(f'Inversão de sinal de {a} = {resultado}')
     elif escolha == '18':
         resultado = verificar_multiplos(a, b)
+        print("Resultado:", resultado)
         historico.append(resultado)
     elif escolha == '19':
         peso1 = float(input("Digite o peso do primeiro número: "))
         peso2 = float(input("Digite o peso do segundo número: "))
         resultado = media_ponderada(a, b, peso1, peso2)
+        print("Resultado:", resultado)
         historico.append(f'Média ponderada de {a} e {b} com pesos {peso1} e {peso2} = {resultado}')
     elif escolha == '20':
         numeros = input("Digite os números separados por vírgula: ")
         lista_numeros = [float(num) for num in numeros.split(',')]
         resultado = media_de_varios_numeros(lista_numeros)
+        print("Resultado:", resultado)
         historico.append(f'Média dos números {lista_numeros} = {resultado}')
     elif escolha == '21':
         resultado = potencia_com_expoente_negativo(a, b)
+        print("Resultado:", resultado)
         historico.append(f'{a} ** {b} = {resultado}')
     elif escolha == '22':
         resultado = verificar_par_ou_impar(a)
+        print("Resultado:", resultado)
         historico.append(resultado)
     elif escolha == '23':
         resultado = verificar_numero_primo(a)
+        print("Resultado:", resultado)
         historico.append(resultado)
     elif escolha == '24':
         cotacao = float(input("Digite a cotação do dólar: "))
         resultado = converter_reais_para_dolares(a, cotacao)
+        print("Resultado:", resultado)
         historico.append(f'{a} reais = {resultado} dólares (cotação: {cotacao})')
     else:
         print("Operação inválida. Tente novamente.")
