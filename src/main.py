@@ -199,10 +199,10 @@ while is_running == True:
         resultado = converter_radianos_para_graus(a)
         historico.append(f'{a} radianos = {resultado} graus')
     elif escolha == '13':
-        resultado = média_entre_dois_números(a, b)
+        resultado = media_entre_dois_numeros(a, b)
         historico.append(f'Média entre {a}  e {b} = {resultado}')
     elif escolha == '14':
-        resultado = comparar_dois_números(a, b)
+        resultado = comparar_dois_numeros(a, b)
         historico.append(resultado)
     elif escolha == '15':
         base = a
