@@ -1,164 +1,240 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Completa</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Científica Avançada</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1e2f;
+      color: #fff;
+      overflow: hidden;
+    }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
+    header {
+      text-align: center;
+      padding: 20px;
+      font-size: 2rem;
+      background: linear-gradient(45deg, #4b6cb7, #182848);
+      animation: fadeIn 2s ease-in-out;
+    }
 
-        h1 {
-            text-align: center;
-        }
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #282c34;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      animation: slideUp 1s ease-in-out;
+    }
 
-        label, select, input {
-            display: block;
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
-            font-size: 1rem;
-        }
+    select, input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      transition: 0.3s ease-in-out;
+    }
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    input:focus, select:focus, button:hover {
+      transform: scale(1.05);
+      background-color: #4b6cb7;
+      color: white;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    #resultado {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #9effa9;
+      animation: colorChange 1s infinite alternate;
+    }
 
-        .resultado, .historico {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-        }
+    #historico {
+      margin-top: 20px;
+      background-color: #333;
+      padding: 10px;
+      border-radius: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
 
-        .historico-item {
-            margin: 5px 0;
-        }
-    </style>
+    @keyframes colorChange {
+      from { color: #9effa9; }
+      to { color: #ffffff; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <h1>Calculadora Completa</h1>
-    <form id="formCalculadora">
-        <label for="operacao">Escolha uma operação:</label>
-        <select id="operacao" required>
-            <option value="">Selecione...</option>
-            <option value="soma">Soma</option>
-            <option value="subtracao">Subtração</option>
-            <option value="multiplicacao">Multiplicação</option>
-            <option value="divisao">Divisão</option>
-            <option value="potencia">Potência</option>
-            <option value="raiz">Raiz Quadrada</option>
-            <!-- Adicione mais operações conforme necessário -->
-        </select>
+  <canvas id="confetti"></canvas>
+  <header>🎉 Calculadora Científica Avançada 🎉</header>
+  <div class="container">
+    <label for="operacao">Escolha uma operação:</label>
+    <select id="operacao"></select><br />
+    <input type="text" id="entrada1" placeholder="Primeiro número" />
+    <input type="text" id="entrada2" placeholder="Segundo número (se precisar)" />
+    <input type="text" id="entrada3" placeholder="Outro valor (se precisar)" style="display:none;" />
+    <button onclick="calcular()">Calcular</button>
+    <div id="resultado"></div>
+    <div id="historico"></div>
+  </div>
 
-        <label for="num1">Número 1:</label>
-        <input type="number" id="num1" required>
+  <script>
+    const operacoes = [
+      "Soma", "Subtração", "Multiplicação", "Divisão", "Potência", "Raiz Quadrada",
+      "Seno", "Cosseno", "Tangente", "Porcentagem", "Converter graus para radianos",
+      "Converter radianos para graus", "Média entre dois números", "Comparar dois números",
+      "Área do triângulo", "Arredondar números", "Inverter sinal", "Verificar múltiplos",
+      "Média ponderada", "Média de vários números", "Potência com expoente negativo",
+      "Verificar par ou ímpar", "Verificar número primo", "Converter reais para dólares"
+    ];
 
-        <label for="num2">Número 2:</label>
-        <input type="number" id="num2">
-
-        <button type="submit">Calcular</button>
-    </form>
-
-    <div class="resultado" id="resultado">Resultado: </div>
-    <div class="historico" id="historico">
-        <strong>Histórico:</strong>
-        <div id="historico-lista"></div>
-    </div>
-</div>
-
-<script>
-    const form = document.getElementById('formCalculadora');
-    const resultadoDiv = document.getElementById('resultado');
-    const historicoLista = document.getElementById('historico-lista');
-
-    let historico = [];
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o envio do formulário padrão
-
-        const operacao = document.getElementById('operacao').value;
-        const n1 = parseFloat(document.getElementById('num1').value);
-        const n2 = parseFloat(document.getElementById('num2').value);
-
-        let resultado;
-        let descricao;
-
-        // Realiza a operação de acordo com a escolha do usuário
-        switch (operacao) {
-            case 'soma':
-                resultado = n1 + n2;
-                descricao = `${n1} + ${n2} = ${resultado}`;
-                break;
-            case 'subtracao':
-                resultado = n1 - n2;
-                descricao = `${n1} - ${n2} = ${resultado}`;
-                break;
-            case 'multiplicacao':
-                resultado = n1 * n2;
-                descricao = `${n1} * ${n2} = ${resultado}`;
-                break;
-            case 'divisao':
-                if (n2 === 0) {
-                    resultado = 'Erro: divisão por zero';
-                    descricao = `${n1} / ${n2} = ${resultado}`;
-                } else {
-                    resultado = n1 / n2;
-                    descricao = `${n1} / ${n2} = ${resultado}`;
-                }
-                break;
-            case 'potencia':
-                resultado = Math.pow(n1, n2);
-                descricao = `${n1} ^ ${n2} = ${resultado}`;
-                break;
-            case 'raiz':
-                resultado = Math.pow(n1, 1/n2); // Cálculo da raiz usando expoente fracionário
-                descricao = `${n2}√${n1} = ${resultado}`;
-                break;
-            default:
-                resultado = 'Operação inválida';
-                descricao = resultado;
-        }
-
-        resultadoDiv.textContent = `Resultado: ${resultado}`; // Exibe o resultado na tela
-        historico.push(descricao); // Armazena a operação no histórico
-        atualizarHistorico(); // Atualiza a lista de histórico
+    const select = document.getElementById("operacao");
+    operacoes.forEach(op => {
+      const option = document.createElement("option");
+      option.text = op;
+      select.add(option);
     });
 
-    function atualizarHistorico() {
-        historicoLista.innerHTML = ''; // Limpa o conteúdo atual do histórico
-        historico.slice().reverse().forEach(item => { // Mostra o histórico da operação mais recente para a mais antiga
-            const div = document.createElement('div');
-            div.classList.add('historico-item');
-            div.textContent = item;
-            historicoLista.appendChild(div);
-        });
+    function calcular() {
+      const op = select.value;
+      const a = parseFloat(document.getElementById("entrada1").value);
+      const b = parseFloat(document.getElementById("entrada2").value);
+      const c = parseFloat(document.getElementById("entrada3").value);
+      let r = "";
+
+      switch (op) {
+        case "Soma": r = a + b; break;
+        case "Subtração": r = a - b; break;
+        case "Multiplicação": r = a * b; break;
+        case "Divisão": r = b === 0 ? "Operação inválida" : a / b; break;
+        case "Potência": r = a ** b; break;
+        case "Raiz Quadrada": r = a ** (1 / b); break;
+        case "Seno": r = Math.sin(a); break;
+        case "Cosseno": r = Math.cos(a); break;
+        case "Tangente": r = Math.tan(a); break;
+        case "Porcentagem": r = (a * b) / 100; break;
+        case "Converter graus para radianos": r = a * (Math.PI / 180); break;
+        case "Converter radianos para graus": r = a * (180 / Math.PI); break;
+        case "Média entre dois números": r = (a + b) / 2; break;
+        case "Comparar dois números":
+          r = a > b ? `${a} é maior que ${b}` : a < b ? `${a} é menor que ${b}` : `${a} é igual a ${b}`;
+          break;
+        case "Área do triângulo": r = (a * b) / 2; break;
+        case "Arredondar números": r = Math.round(a); break;
+        case "Inverter sinal": r = -a; break;
+        case "Verificar múltiplos":
+          r = b !== 0 ? (a % b === 0 ? `${a} é múltiplo de ${b}` : `${a} não é múltiplo de ${b}`) : "Divisor inválido";
+          break;
+        case "Média ponderada":
+          const peso1 = parseFloat(prompt('Peso do primeiro número:'));
+          const peso2 = parseFloat(prompt('Peso do segundo número:'));
+          r = (a * peso1 + b * peso2) / (peso1 + peso2);
+          break;
+        case "Média de vários números":
+          const entrada = prompt("Digite os números separados por vírgula:");
+          const numeros = entrada.split(',').map(n => parseFloat(n.trim()));
+          r = numeros.reduce((s, n) => s + n, 0) / numeros.length;
+          break;
+        case "Potência com expoente negativo":
+          r = b < 0 ? 1 / (a ** Math.abs(b)) : a ** b;
+          break;
+        case "Verificar par ou ímpar":
+          r = a % 2 === 0 ? `${a} é par` : `${a} é ímpar`;
+          break;
+        case "Verificar número primo":
+          r = 'não é primo';
+          if (a > 1) {
+            let primo = true;
+            for (let i = 2; i <= Math.sqrt(a); i++) {
+              if (a % i === 0) { primo = false; break; }
+            }
+            r = primo ? `${a} é primo` : `${a} não é primo`;
+          } else r = `${a} não é primo`;
+          break;
+        case "Converter reais para dólares":
+          const cot = parseFloat(prompt("Digite a cotação do dólar:"));
+          r = cot ? a / cot : "Cotação inválida";
+          break;
+      }
+      document.getElementById("resultado").innerText = `Resultado: ${r}`;
+      document.getElementById("historico").innerHTML += `<div>${op} → ${r}</div>`;
+      estourarConfete();
     }
-</script>
+
+    // Confete
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let confetes = [];
+
+    function gerarConfete() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * -canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 100,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        tilt: Math.floor(Math.random() * 10) - 10,
+        tiltAngleIncrement: Math.random() * 0.1 + 0.05,
+        tiltAngle: 0
+      };
+    }
+
+    function estourarConfete() {
+      confetes = Array.from({ length: 150 }, gerarConfete);
+      animateConfetti();
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetes.forEach(c => {
+        ctx.beginPath();
+        ctx.lineWidth = c.r / 2;
+        ctx.strokeStyle = c.color;
+        ctx.moveTo(c.x + c.tilt + c.r / 4, c.y);
+        ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 4);
+        ctx.stroke();
+      });
+      updateConfetti();
+    }
+
+    function updateConfetti() {
+      confetes.forEach(c => {
+        c.tiltAngle += c.tiltAngleIncrement;
+        c.y += (Math.cos(c.d) + 3 + c.r / 2) / 2;
+        c.tilt = Math.sin(c.tiltAngle) * 15;
+      });
+    }
+
+    function animateConfetti() {
+      drawConfetti();
+      if (confetes.length > 0) {
+        requestAnimationFrame(animateConfetti);
+      }
+    }
+  </script>
 </body>
 </html>
